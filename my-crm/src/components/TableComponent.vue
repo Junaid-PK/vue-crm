@@ -59,7 +59,7 @@
               <td
                 class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
               >
-              <button type="button" class="rounded-md bg-red-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" @click="deleteItem(item.id)">Delete</button>
+              <button type="button" class="rounded-md bg-red-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-red-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" @click="deleteItem(item.id)">Delete</button>
               </td>
             </tr>
           </tbody>
@@ -94,6 +94,9 @@ export default {
         this.$router.push({ name: `EditDepartments`, params: { id } });
       }else if (this.api === 'team'){
         this.$router.push({ name: `EditTeams`, params: { id } });
+      }else if (this.api === 'team-lead')
+      {
+        this.$router.push({ name: ``, params: { id }});
       }
     },
     add()

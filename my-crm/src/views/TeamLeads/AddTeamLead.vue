@@ -1,5 +1,5 @@
 <template>
-    <h1 class="text-center font-bold text-xl">Edit Department</h1>
+    <h1 class="text-center font-bold text-xl">Add Team Lead</h1>
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
       <form class="space-y-6" action="#" method="POST" @submit.prevent="edit">
         <div>

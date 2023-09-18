@@ -3,13 +3,13 @@ import TableComponent from "../../components/TableComponent.vue";
 </script>
 
 <template>    
-    <h1 class="font-bold text-xl">Manage Team Members</h1>
+    <h1 class="font-bold text-xl">Manage Teams</h1>
 
     <TableComponent
-    title="All Team Members"
+    title="All Team Leads"
     :data="teams"
     :headings="headings"
-    api="team"
+    api="team-lead"
   ></TableComponent>
 </template>
 
