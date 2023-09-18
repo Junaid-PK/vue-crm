@@ -16,7 +16,7 @@
     </div>
 
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-      <form class="space-y-6" action="#" method="POST">
+      <form class="space-y-6" action="#" method="POST" @submit.prevent="login">
         <div>
           <label
             for="email"
@@ -29,7 +29,8 @@
               name="email"
               type="email"
               autocomplete="email"
-              required=""
+              required
+              v-model="formData.email"
               class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             />
           </div>
@@ -42,13 +43,6 @@
               class="block text-sm font-medium leading-6 text-gray-900"
               >Password</label
             >
-            <div class="text-sm">
-              <a
-                href="#"
-                class="font-semibold text-indigo-600 hover:text-indigo-500"
-                >Forgot password?</a
-              >
-            </div>
           </div>
           <div class="mt-2">
             <input
@@ -56,7 +50,8 @@
               name="password"
               type="password"
               autocomplete="current-password"
-              required=""
+              required
+              v-model="formData.password"
               class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             />
           </div>
@@ -75,12 +70,41 @@
       <p class="mt-10 text-center text-sm text-gray-500">
         Not a member?
         {{ " " }}
-        <a
-          href="#"
-          class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
-          >Register Now</a
-        >
+        <RouterLink class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500" to="/register">Register Now</RouterLink>
       </p>
     </div>
   </div>
 </template>
+
+
+<script>
+import {toast} from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
+export default {
+  data(){
+    return {
+        formData:{
+        email: "",
+        password: "",
+      }
+    }
+  },
+  methods:{
+    async login(){
+      try {
+        const response = await this.$axios.post("/login", this.formData);
+        console.log(response.data.message);
+        const token = response.data.token;
+        localStorage.clear();
+        localStorage.setItem('token',token);
+        toast.success(response.data.message);
+        this.$router.push('/');
+      } catch (error) {
+        toast.error('Something went Wrong'); 
+        console.error("Login failed:", error);
+      }
+    }
+  }
+}
+
+</script>
